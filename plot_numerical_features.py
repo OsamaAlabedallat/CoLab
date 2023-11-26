@@ -20,3 +20,27 @@ def plotNumData(dataFrame):
   
   plt.tight_layout()
   plt.show()
+  
+
+def heatPlot(dataFrame):
+  import seaborn as sns
+  corr = dataFrame.corr()  
+  # Plot heatmap
+  plt.figure(figsize=(10, 8))
+  sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f', square=True)
+  plt.title('Heatmap of Numerical Features')
+  plt.show()
+  
+
+def scatterFeaturs(dataFram):
+  n_features = dataFram.shape[1] - 1  # excluding the first column
+  fig, axs = plt.subplots(n_features, figsize=(10, n_features * 5))
+  
+  for i, feature in enumerate(dataFram.columns[:-1]):  # excluding the first column
+      axs[i].scatter(dataFram[feature], dataFram['price'])
+      axs[i].set_xlabel(feature)
+      axs[i].set_ylabel('Price')
+      axs[i].set_title(f'Scatter plot of {feature} vs Price')
+  
+  plt.tight_layout()
+  plt.show()
